@@ -14,11 +14,13 @@ function App() {
     })
     .then(res => res.json());
     console.log(newData);
+    //So how do we make the api call, store that value in returned data, then produce that change on the UI
+    setReturnedData(newData.result);
   };
   
-  getData("/api");
   return (
     <div className="App">
+      <button onClick={() => getData("/quit")}>Click</button>
       {returnedData}
     </div>
   );
