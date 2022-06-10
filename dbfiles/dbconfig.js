@@ -1,10 +1,11 @@
 //in this config file, we will make some basic congigurations so we connect really easy to my sql server
 
 const config = {
-    user: 'CodingWithKevin',
+    user: 'CodingWithLucy',
     password: 'lucy',
+    // server: 'DESKTOP-BL6QON1',
     server: 'DESKTOP-BL6QON1',
-    database: 'SQL Tutorial',
+    database: 'SQL_Tutorial',
     options: {
         trustServerCertificate: true,
         trustedConnection: false,
@@ -14,4 +15,4 @@ const config = {
     port: 1433
 }
 
-module.exports = config;
+module.exports = config;//export
