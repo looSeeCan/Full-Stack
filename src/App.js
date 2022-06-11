@@ -9,7 +9,8 @@ function App() {
   const [employee, setEmployee] = useState({EmployeeID: 0, FirstName: "", LastName: "",  Age: 0, Gender: ""});
   // console.log(employee);
   
-  const setInput = (e) => {
+  const setInput = (e) => {//we have to make sure that fields that require a number in our database actually get sent as a number
+    //by default as we package this up, by default it is sent as a string
     const {name, value} = e.target;
     // console.log(name);
     // console.log(value);
@@ -27,19 +28,19 @@ function App() {
     }))
   }
 
-  const getData = async(url) => {
+  const fetchData = async() => {
     console.log(employee);
-    // const newData = await fetch(url, {
-    //   method: "GET",//all we are doing is grabbing from the back end and making it appear on the front end
-    //   headers: {//headers help us tell the response how we are sending and accepting data
-    //     "content-type": "aplication/json",
-    //     "Accept": "application/json"//we are accepting the data in a json format
-    //   }
-    // })
-    // .then(res => res.json());
-    // console.log(newData);
-    // //So how do we make the api call, store that value in returned data, then produce that change on the UI
-    // setReturnedData(newData.result);
+    const newData = await fetch('/api', {
+      method: "Post",//all we are doing is grabbing from the back end and making it appear on the front end
+      headers: {//headers help us tell the response how we are sending and accepting data
+        "content-type": "aplication/json",
+        "Accept": "application/json"//we are accepting the data in a json format
+      }
+    })
+    .then(res => res.json());
+    console.log(newData);
+    //So how do we make the api call, store that value in returned data, then produce that change on the UI
+    setReturnedData(newData.result);
   };
   
   return (
@@ -71,8 +72,8 @@ function App() {
       placeholder='Gender'
       onChange={setInput}></input>
 
-      <button onClick={() => getData()}>Click</button>
-      <button onClick={() => getData("/quit")}>Create</button>
+      <button onClick={() => fetchData()}>Click</button>
+      <button onClick={() => fetchData("/quit")}>Create</button>
       <p>EmployeeID: {returnedData.EmployeeID}</p>
       <p>FirstName: {returnedData.FirstName}</p>
       <p>LastName: {returnedData.LastName}</p>

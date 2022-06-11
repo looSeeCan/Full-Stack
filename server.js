@@ -24,7 +24,7 @@ app.post("/quit", function(req, res) {
 }); 
 
 let Pam = new Employee(1002, "Pam", "Beazley", 29, "Female");
-// console.log(Pam);
+// console.log(Pam);    
 
 // dbOperations.getEmployees().then(res => {
 //     console.log(res.recordset);//an array of objects. our only object now though is jim halpert
