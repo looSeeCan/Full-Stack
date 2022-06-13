@@ -13,9 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.post("/api", function(req, res) {    
-    console.log("called");
-    res.send({result: "Helloooo"});
+app.post("/api", async(req, res) => {//this has to be an async     
+    console.log("this is what fetch is calling when I click");
+    // console.log("req.body:", req.body);
+    // console.log("req.route:", req.route);
+    // console.log(res);
+    const result = await dbOperations.getEmployees(req.body.name);//because we have to wait for this operation to finish. Im not to clear on async and await yet. but getEmployees from dbOperations gets called
+    console.log("result:", result);
+    res.send(result.recordset);      
 }); 
 
 app.post("/quit", function(req, res) {
@@ -25,10 +30,6 @@ app.post("/quit", function(req, res) {
 
 let Pam = new Employee(1002, "Pam", "Beazley", 29, "Female");
 // console.log(Pam);    
-
-// dbOperations.getEmployees().then(res => {
-//     console.log(res.recordset);//an array of objects. our only object now though is jim halpert
-// });
 
 // dbOperations.createEmployees(Pam);
 

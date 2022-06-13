@@ -6,11 +6,12 @@ const config                =require('./dbConfig'),//this is import
 // console.log("sql", sql);
 
 //quick function to get the employees from the database
-const getEmployees = async() => {
+const getEmployees = async(FirstName) => {
     try{
+        // console.log(FirstName);
         let pool = await sql.connect(config);
-        let employees = pool.request().query('SELECT * from EmployeeDemographics');
-        console.log(employees);
+        let employees = await pool.request().query(`SELECT * from EmployeeDemographics WHERE FirstName ='${FirstName}'`);// a query
+        // console.log(employees);
         return employees;
     }
     catch(error) {
@@ -23,7 +24,7 @@ const createEmployees = async(Employee) => {
         let pool = await sql.connect(config);
         let employees = pool.request()
         .query(`INSERT INTO EmployeeDemographics VALUES
-        (${Employee.EmployeeID} , '${Employee.FirstName}', '${Employee.LastName}', ${Employee.Age}, '${Employee.Gender}')
+        (${Employee.EmployeeID}, '${Employee.FirstName}', '${Employee.LastName}', ${Employee.Age}, '${Employee.Gender}')
         `)
         return employees; 
     }

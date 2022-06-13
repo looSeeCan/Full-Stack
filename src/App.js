@@ -4,7 +4,6 @@ import React, {useState} from "react";
 //made a change in the package.json file: "proxy": localhost 5000
 function App() {
   const [returnedData, setReturnedData] = useState(["Nyob Zoo"]);  
-  
   //capture the input fields below as they are being typed
   const [employee, setEmployee] = useState({EmployeeID: 0, FirstName: "", LastName: "",  Age: 0, Gender: ""});
   // console.log(employee);
@@ -28,26 +27,32 @@ function App() {
     }))
   }
 
-  const fetchData = async() => {
+  const fetchData = async() => {//for the button  click
     console.log(employee);
     const newData = await fetch('/api', {
-      method: "Post",//all we are doing is grabbing from the back end and making it appear on the front end
+      method: "Post",// connected to a post request in server.js line 16
       headers: {//headers help us tell the response how we are sending and accepting data
         "content-type": "aplication/json",
         "Accept": "application/json"//we are accepting the data in a json format
-      }
+      },
+      body: JSON.stringify({
+        name: employee.FirstName
+      })
     })
     .then(res => res.json());
-    console.log(newData);
+    console.log("newData:", newData);
+    console.log(newData[0]);
+
     //So how do we make the api call, store that value in returned data, then produce that change on the UI
-    setReturnedData(newData.result);
+    setReturnedData(newData[0]);
+    
   };
   
   return (
     <div className="App">
       <input 
         type= "number"//attribute to only accept numbers
-        name='EmplyoyeeID'
+        name='EmployeeID'
         placeholder='EmployeeID'
         onChange={setInput}></input>
       
