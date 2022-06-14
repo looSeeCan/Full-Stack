@@ -15,6 +15,7 @@ app.use(cors());
 
 app.post("/api", async(req, res) => {//this has to be an async     
     console.log("this is what fetch is calling when I click");
+    console.log(req);
     // console.log("req.body:", req.body);
     // console.log("req.route:", req.route);
     // console.log(res);

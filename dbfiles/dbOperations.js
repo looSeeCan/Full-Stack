@@ -8,7 +8,7 @@ const config                =require('./dbConfig'),//this is import
 //quick function to get the employees from the database
 const getEmployees = async(FirstName) => {
     try{
-        // console.log(FirstName);
+        console.log("FirstName:", FirstName);
         let pool = await sql.connect(config);
         let employees = await pool.request().query(`SELECT * from EmployeeDemographics WHERE FirstName ='${FirstName}'`);// a query
         // console.log(employees);
