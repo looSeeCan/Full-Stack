@@ -15,7 +15,7 @@ app.use(cors());
 
 app.post("/api", async(req, res) => {//this has to be an async     
     console.log("this is what fetch is calling when I click");
-    console.log(req);
+    // console.log(req);
     // console.log("req.body:", req.body);
     // console.log("req.route:", req.route);
     // console.log(res);
@@ -24,9 +24,11 @@ app.post("/api", async(req, res) => {//this has to be an async
     res.send(result.recordset);      
 }); 
 
-app.post("/quit", function(req, res) {
+app.post("/hello", async(req, res) => {
+    await dbOperations.createEmployees(req.body);
+    const result = await dbOperations.getEmployees(req.body.FirstName)
     console.log("called quit");
-    res.send({result: "Good Bye"});
+    res.send(result.recordset);
 }); 
 
 let Pam = new Employee(1002, "Pam", "Beazley", 29, "Female");
